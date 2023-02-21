@@ -14,7 +14,6 @@ def sort_colors(nums):
         for index in indices:
             nums[counter] = num
             counter += 1
-    print(nums)
 
 
 
