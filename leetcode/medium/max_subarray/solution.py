@@ -5,8 +5,27 @@
 # input nums:   input array of numbers
 
 # set up test case
-target = 11
-nums = [1,1,1,1,1,1,1,1]
+target = 4
+nums = [1,4,4]
+
+def v2(target, nums):
+    min_arr = float('inf')
+    window = []
+    total = 0
+    for num in nums:
+        window.append(num)
+        total += num
+        if total >= target:
+            # now we need to start popping values from the start
+            while total >= target:
+                if min_arr >= len(window):
+                    min_arr = len(window)
+                val = window.pop(0)
+                total -= val
+    if min_arr == float('inf'):
+        print(0)
+        return 0
+    return min_arr
 
 def minSubArray(target, nums):
     min_arr = float('inf')
@@ -49,4 +68,4 @@ def getSum(arr):
         sum += num
     return sum
 
-minSubArray(target, nums)
+print(v2(target, nums))
