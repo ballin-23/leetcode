@@ -11,28 +11,29 @@ def tournament_winner(competitions, results):
     while count < len(competitions):
         winner = results[count]
         if winner == 1:
-            print("home team")
-            if competitions[count][0] in team_scores:
-                team_scores[competitions[count][0]] += 3
-            else:
-                team_scores[competitions[count][0]] = 3
+            team_scores = update_dictionary(0,team_scores, competitions, count)
         else:
-            print("away team")
-            if competitions[count][1] in team_scores:
-                team_scores[competitions[count][1]] += 3
-            else:
-                team_scores[competitions[count][1]] = 3
+            team_scores = update_dictionary(1,team_scores, competitions, count)
         count += 1
+    return calculate_max(team_scores)
+
+def update_dictionary(index, team_scores, competitions, count):
+    if competitions[count][index] in team_scores:
+        team_scores[competitions[count][index]] += 3
+    else:
+        team_scores[competitions[count][index]] = 3
+    return team_scores
+
+def calculate_max(team_scores):
     max = float('-inf')
-    high = ""
+    team_with_highest_score = ""
     for team in team_scores:
         if team_scores[team] > max:
             max = team_scores[team]
-            high = team
-    print(max, high)
-    return team
+            team_with_highest_score = team
+    return team_with_highest_score
 
-# competitions = [["html", "c#"], ["c#", "python"], ["python", "html"]]
+
 competitions = [
     ["HTML", "Java"],
     ["Java", "Python"],
@@ -40,7 +41,7 @@ competitions = [
   ]
 results = [0,1,1]
 
-tournament_winner(competitions, results)
+print(tournament_winner(competitions, results))
 
 
 
