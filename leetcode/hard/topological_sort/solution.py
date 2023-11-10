@@ -32,12 +32,6 @@ def dfs(start, graph, explored, stack):
     if start not in stack:
         stack.append(start)
 
-def intersection(children, explored):
-    for child in children:
-        if child in explored:
-            return True
-    return False
-
 jobs = [1, 2, 3, 4]
 deps = [[1, 2],[1, 3],[3, 2],[4, 2],[4, 3]]
 
